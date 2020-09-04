@@ -7,7 +7,57 @@
 
 	<groupId>com.whackon.ums</groupId>
 	<artifactId>ums-parent</artifactId>
-	<version>1.0.0</version>
+	<version>4.0.0</version>
+	<packaging>pom</packaging>
 
+	<!-- 通过本文件用于约定该项目中所用到依赖关系的版本信息 -->
+	<!-- 配置使用 Spring Boot Starter Parent 作为整体的父级依赖关系 [BEGIN] -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.3.RELEASE</version>
+	</parent>
+	<!-- 配置使用 Spring Boot Starter Parent 作为整体的父级依赖关系 [END] -->
 
+	<dependencies>
+		<!-- 无论是 Eureka Server 还是 Eureka Client 都会使用到 Spring Boot Starter Web -->
+		<!-- 配置 Spring Boot Starter Web 依赖关系 [BEGIN] -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- 配置 Spring Boot Starter Web 依赖关系 [END] -->
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Hoxton.SR8</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- 配置 Spring Boot Maven 项目打包依赖插件 [BEGIN] -->
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<!-- 配置 Spring Boot Maven 项目打包依赖插件 [END] -->
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
