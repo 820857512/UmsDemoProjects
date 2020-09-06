@@ -1,5 +1,7 @@
 package com.whackon.ums.transport.impl;
 
+import com.whackon.ums.base.pojo.vo.Page;
+import com.whackon.ums.pojo.entity.User;
 import com.whackon.ums.service.UserService;
 import com.whackon.ums.transport.UserTransport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +32,17 @@ public class UserTransportImpl implements UserTransport {
 	@PostMapping("/login")
 	public String loginUser(@RequestParam String cellphone, @RequestParam String password) throws Exception {
 		return userService.loginUser(cellphone, password);
+	}
+
+	/**
+	 * <b>获得分页对象</b>
+	 * @param page
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping("/page")
+	@Override
+	public Page<User> getUserForPage(Page<User> page) throws Exception {
+		return userService.getUserForPage(page);
 	}
 }

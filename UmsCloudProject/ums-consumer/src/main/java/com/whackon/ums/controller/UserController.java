@@ -1,7 +1,9 @@
 package com.whackon.ums.controller;
 
 import com.whackon.ums.base.controller.BaseController;
+import com.whackon.ums.base.pojo.vo.Page;
 import com.whackon.ums.base.pojo.vo.ResponseVO;
+import com.whackon.ums.pojo.entity.User;
 import com.whackon.ums.transport.UserTransport;
 import com.whackon.ums.util.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +42,23 @@ public class UserController extends BaseController {
 			}
 		}
 		return ResponseVO.error("请填写正确的登录信息");
+	}
+
+	/**
+	 * <b>分页查询列表</b>
+	 * @param pageNum
+	 * @param pageSize
+	 * @param draw
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping("/page")
+	public ResponseVO queryUserForPage(Integer pageNum, Integer pageSize, Integer draw) throws Exception {
+		// 封装分页视图对象 Page
+		Page<User> page = new Page<User>(pageNum, pageSize, draw);
+		// 使用分页视图对象查询 Page 对象
+		page = userTransport.getUserForPage(page);
+		// 使用 Page 创建返回视图对象
+		return ResponseVO.success(page);
 	}
 }

@@ -1,5 +1,8 @@
 package com.whackon.ums.service;
 
+import com.whackon.ums.base.pojo.vo.Page;
+import com.whackon.ums.pojo.entity.User;
+
 /**
  * <b>用户信息业务持久层接口</b>
  * @author Arthur
@@ -15,4 +18,12 @@ public interface UserService {
 	 * @throws Exception
 	 */
 	String loginUser(String cellphone, String password) throws Exception;
+
+	/**
+	 * <b>获得分页对象</b>
+	 * @param page
+	 * @return
+	 * @throws Exception
+	 */
+	Page<User> getUserForPage(Page<User> page) throws Exception;
 }

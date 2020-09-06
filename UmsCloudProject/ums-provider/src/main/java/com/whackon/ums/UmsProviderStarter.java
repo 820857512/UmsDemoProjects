@@ -12,7 +12,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @since 4.0.0
  */
 @EnableEurekaClient
-@MapperScan("com.whackon")
+@MapperScan("com.whackon.ums.dao")
 @SpringBootApplication
 public class UmsProviderStarter {
 	public static void main(String[] args) {

@@ -1,6 +1,10 @@
 package com.whackon.ums.service.impl;
 
-import cn.ekgc.ums.util.RedisUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.whackon.ums.base.pojo.vo.Page;
+import com.whackon.ums.util.PageUtil;
+import com.whackon.ums.util.RedisUtil;
 import com.whackon.ums.dao.UserDao;
 import com.whackon.ums.pojo.entity.User;
 import com.whackon.ums.service.UserService;
@@ -51,5 +55,24 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * <b>获得分页对象</b>
+	 * @param page
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public Page<User> getUserForPage(Page<User> page) throws Exception {
+		// 创建 PageHelper 分页过滤器
+		PageHelper.startPage(page.getPageNum(), page.getPageSize());
+		// 查询列表
+		List<User> list = userDao.findListByQuery(new User());
+		// 根据列表获得 PageHelper 的 PageInfo 对象
+		PageInfo<User> pageInfo = new PageInfo<User>(list);
+		// 进行数据切换
+		page = PageUtil.parsePageFromPageInfo(page, pageInfo);
+		return page;
 	}
 }
